@@ -7,7 +7,8 @@ import { getDatabase,
 import { getAuth,
          createUserWithEmailAndPassword,
          signInWithEmailAndPassword,
-         onAuthStateChanged
+         onAuthStateChanged,
+         signOut
         } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js"
 
 
@@ -36,10 +37,33 @@ const inputBtn = document.getElementById("input-btn")
 const ulEl = document.getElementById("ul-el")
 const deleteBtn = document.getElementById("delete-btn")
 
+const leadsEl=document.getElementById("leads-tracker")
+const authEl=document.getElementById("auth-container")
+const ExitEl=document.getElementById("exit-el")
+const errorEl= document.getElementById("error-el")
+
+let currentUser=null
+
+ExitEl.addEventListener("click" ,function() {
+    signOut(auth)
+})
+
 
 onAuthStateChanged(auth,function (user) {
-   console.log(user)
+    currentUser=user
+   if(user) {
+    authEl.style.display="none"
+    leadsEl.style.display="block"
+    const referenceDB=ref(database,`users/${user.uid}/leads`)
+    console.log(user.uid)
+   }
+
+     else {
+       authEl.style.display="block"
+        leadsEl.style.display="none"
+     }
 })
+
 
 signUpEl.addEventListener("click",function() {
     const email=emailEl.value
@@ -48,6 +72,17 @@ signUpEl.addEventListener("click",function() {
       createUserWithEmailAndPassword(auth, email, password)
         .then(function(userCredential) {
           console.log(userCredential)
+          errorEl.textContent=""
+        })
+
+        .catch(function(error){
+            console.log(error)
+            if(error.code==="auth/invalid-email"){
+                errorEl.textContent="Please enter a valid email"
+            }
+            else if(error.code=== "auth/email-already-in-use"){
+               errorEl.textContent="An account with this email already exists."
+              }
         })
 
 })
@@ -57,12 +92,18 @@ loginEl.addEventListener("click" ,function(){
       const email=emailEl.value
       const password= passwordEl.value
       console.log(email)
+
+
       signInWithEmailAndPassword(auth,email,password)
       .then(function(userCredential){
         console.log(userCredential.user.email)
+        errorEl.textContent=""
       })
-      .catch(function(userCredential){
-        console.log(Error)
+      .catch(function(error){
+        console.log(error.code)
+        if(error.code==="auth/invalid-credential")
+        errorEl.textContent="Incorrect email or password"
+        
       })
 })
 
@@ -95,6 +136,19 @@ deleteBtn.addEventListener("dblclick", function() {
 })
 
 inputBtn.addEventListener("click", function() {
-    push(referenceInDB, inputEl.value)
-    inputEl.value = "" 
+    if (currentUser){
+        console.log("user is logged in")
+        if(inputEl.value!=""){
+           const referenceDB1=ref(database,`users/${currentUser.uid}/leads`)
+          push(referenceDB1, inputEl.value)
+           inputEl.value = "" 
+        }
+       
+        
+    }
+    else if(currentUser===null){
+        errorEl.textContent="user is not logged in"
+    }
+    
+   
 })
