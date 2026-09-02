@@ -1,9 +1,15 @@
 body {
-    margin: 0 auto;
-    padding: 10px;
     font-family: Arial, Helvetica, sans-serif;
     max-width: 302px;
-}
+    background-color: rgb(228, 228, 240);
+    padding: 20px;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}  
 
 label {
     color: #5f9341;
@@ -14,16 +20,20 @@ input {
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
-    border: 1px solid #5f9341;
-    margin-bottom: 4px;
+    border-radius: 8px;
+    border: 1px solid #2c7767;
+    margin-bottom: 8px;
 }
 
 button {
     background: #5f9341;
     color: white;
     padding: 10px 20px;
+    border-radius: 8px;
     border: 1px solid #5f9341;
     font-weight: bold;
+    margin-right: 5px;
+    cursor: pointer;
 }
 
 #delete-btn {
@@ -46,6 +56,20 @@ a {
 }
 #leads-tracker{
     display: none;
+}
+#auth-container {
+   background: white;
+   padding: 30px;
+   border-radius: 10px;
+   box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+   box-sizing: border-box;
+   display: flex;
+   flex-direction: column;
+   gap:10px;
+   transition: .3s;
+}
+h1 {
+    text-align: center;
 }
 
 

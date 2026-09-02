@@ -30,7 +30,6 @@ const loginEl = document.getElementById("login-btn")
 const app = initializeApp(firebaseConfig)
 const database = getDatabase(app)
 const auth=getAuth(app)
-const referenceInDB = ref(database, "leads")
 
 const inputEl = document.getElementById("input-el")
 const inputBtn = document.getElementById("input-btn")
@@ -56,6 +55,15 @@ onAuthStateChanged(auth,function (user) {
     leadsEl.style.display="block"
     const referenceDB=ref(database,`users/${user.uid}/leads`)
     console.log(user.uid)
+
+    onValue(referenceDB, function(snapshot) {
+
+         if(snapshot.exists()) {
+            const snapshotValues = snapshot.val()
+            const leads=Object.values(snapshotValues)
+            render(leads)
+          }
+      })
    }
 
      else {
@@ -131,8 +139,12 @@ onValue(referenceInDB, function(snapshot) {
 })
 
 deleteBtn.addEventListener("dblclick", function() {
-    remove(referenceInDB)
+    if(currentUser) {
+    const referenceDl=ref(database,`users/${currentUser.uid}/leads`)
+    remove(referenceDl)
     ulEl.innerHTML = ""
+    }
+   
 })
 
 inputBtn.addEventListener("click", function() {
