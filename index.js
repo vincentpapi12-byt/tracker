@@ -129,14 +129,7 @@ function render(leads) {
     ulEl.innerHTML = listItems
 }
 
-onValue(referenceInDB, function(snapshot) {
-    const snapshotDoesExist = snapshot.exists()
-    if (snapshotDoesExist) {
-        const snapshotValues = snapshot.val()
-        const leads = Object.values(snapshotValues)
-        render(leads)
-    }
-})
+
 
 deleteBtn.addEventListener("dblclick", function() {
     if(currentUser) {
