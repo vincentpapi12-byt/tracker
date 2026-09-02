@@ -9,10 +9,11 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
 }  
 
 label {
-    color: #5f9341;
+    color: #2c7767;
     font-weight: 900;
 }
 
@@ -21,43 +22,103 @@ input {
     padding: 10px;
     box-sizing: border-box;
     border-radius: 8px;
-    border: 1px solid #2c7767;
+    border: 2px solid #2c7767;
+    box-shadow: 0 2px 7px rgba(62, 138, 121, 0.15);
     margin-bottom: 8px;
+    background: white;
+    color:black;
+}
+
+input:focus {
+      border-color: #0e6181;
+      outline: none;
+}
+
+input::placeholder {
+    opacity: 0.7;
 }
 
 button {
-    background: #5f9341;
+    background:#2c7767;
     color: white;
     padding: 10px 20px;
     border-radius: 8px;
-    border: 1px solid #5f9341;
+    border: 1px solid#2c7767;
     font-weight: bold;
     margin-right: 5px;
     cursor: pointer;
+    transition: .3s;
+}
+button:hover {
+    transform: translateY(-2px);
+     background: #0e6181;
 }
 
 #delete-btn {
     background: white;
-    color: #5f9341;
+    color: #2c7767;
 }
 
 ul {
     margin-top: 20px;
     list-style: none;
     padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 li {
     margin-top: 5px;
+    padding: 8px;
+    background: #f5f5f5;
+    border-radius: 6px;
 }
 
 a {
-    color: #5f9341;
+    color: #2c7767;
+    display: block;
+    padding: 4px;
 }
+
+a:hover {
+   color: #0e6181;
+}
+
 #leads-tracker{
     display: none;
+    width: 100%;
+    padding: 20px;
+   
+
 }
 #auth-container {
+   
+}
+h1 {
+    margin-top: 0;
+    text-align: center;
+    color: #2c7767;;
+}
+.start {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    
+
+}
+.start button {
+    width: 120px;
+}
+
+.actions {
+    display:flex;
+    gap: 10px;
+}
+.actions button {
+    flex: 1;
+}
+.card {
    background: white;
    padding: 30px;
    border-radius: 10px;
@@ -66,10 +127,9 @@ a {
    display: flex;
    flex-direction: column;
    gap:10px;
+   border: 1px solid #e5e5e5;
    transition: .3s;
 }
-h1 {
-    text-align: center;
+.card:hover {
+    transform: translateY(-2px);
 }
-
-

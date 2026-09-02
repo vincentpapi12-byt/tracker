@@ -11,22 +11,27 @@
     <body>
 
 
-      <div id="auth-container">
+      <div id="auth-container" class="card">
+        <h1>Leads Tracker</h1>
     <input type="email" id="email-el" placeholder="Email">
     <input type="password" id="password-el" placeholder="Password">
-
+    <div class="start">
     <button id="signup-btn">Create account</button>
     <button id="login-btn">Log in</button>
+    </div>
     <p id="error-el"></p>
     </div>
 
 
 
-      <div id="leads-tracker">
+      <div id="leads-tracker" class="card">
          <label>Enter URL:</label>
         <input type="text" id="input-el" placeholder="https://scrimba.com">
+        <div class="actions">
         <button id="input-btn">SAVE INPUT</button>
         <button id="delete-btn">DELETE ALL</button>
+        </div>
+       
         <ul id="ul-el">
         </ul>
         <button id="exit-el">Sign Out</button>
